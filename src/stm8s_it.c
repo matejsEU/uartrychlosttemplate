@@ -1,30 +1,3 @@
-/**
-  ******************************************************************************
-  * @file     stm8s_it.c
-  * @author   MCD Application Team
-  * @version  V2.0.4
-  * @date     26-April-2018
-  * @brief    Main Interrupt Service Routines.
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software 
-  * distributed under the License is distributed on an "AS IS" BASIS, 
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */ 
-
 /* Includes ------------------------------------------------------------------*/
 #include "stm8s_it.h"
 
@@ -335,12 +308,29 @@ INTERRUPT_HANDLER(TIM1_CAP_COM_IRQHandler, 12)
   * @param  None
   * @retval None
   */
+extern uint16_t ledtime;
+extern bool speed_changed;
  INTERRUPT_HANDLER(UART1_RX_IRQHandler, 18)
 {
-  /* In order to detect unexpected events during development,
-     it is recommended to set a breakpoint on the following instruction.
-  */
+  char c = UART1_ReceiveData8();
+
+    if (c >= '0' && c <= '9')
+    {
+        uint8_t rychlost = c - '0';
+
+        if (rychlost == 0)
+        {
+            ledtime = 0;
+        }
+        else
+        {
+            ledtime = 1000 / rychlost;
+        }
+
+        speed_changed = true;
+    }
 }
+
 #endif /*STM8S105 || STM8S001 */
 
 /**

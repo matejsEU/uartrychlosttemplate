@@ -1,12 +1,3 @@
-/*
- * Soubor:  uart.c
- * Datum:   15.01.2021 13:24
- * Autor:   Marek Nožka, nozka <@t> spseol <d.t> cz
- * Licence: GNU/GPL 
- * Úloha: 
- * Popis:   
- ****************************************************/
-
 #include "uart1.h"
 
 
@@ -22,6 +13,7 @@ void init_uart1(void)
                UART1_MODE_TXRX_ENABLE   //  - Receive and transmit enabled
         );
     UART1_Cmd(ENABLE);
+    UART1_ITConfig(UART1_IT_RXNE, ENABLE);
 }
 
 
