@@ -47,27 +47,6 @@ int main(void)
                     printf("\nLED STOP\n");
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 speed_changed = false;
             }
         }
