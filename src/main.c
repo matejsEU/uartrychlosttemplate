@@ -18,8 +18,6 @@ void init(void)
     GPIO_Init(LED_PORT, LED_PIN, GPIO_MODE_OUT_PP_LOW_SLOW);
 
 }
-
-
 int main(void)
 {
   
